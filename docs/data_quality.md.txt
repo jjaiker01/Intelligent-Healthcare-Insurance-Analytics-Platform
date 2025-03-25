@@ -21,8 +21,8 @@ Alert if more than 5% of the name fields are empty.
 Data Quality Actions:
 Replace invalid ages with the median age.
 Delete rows where the name is empty.
-2. Accidents Table
 
+2. Accidents Table
 Delete Duplicates:
 Check for duplicate accident_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -44,8 +44,8 @@ Alert if any foreign key references are invalid.
 Data Quality Actions:
 Remove rows with invalid foreign keys.
 Replace future dates with the current date.
-3. SOAT Table
 
+3. SOAT Table
 Delete Duplicates:
 Check for duplicate soat_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -67,8 +67,8 @@ Alert for invalid foreign key references.
 Data Quality Actions:
 Swap start_date and end_date if necessary.
 Remove rows with invalid foreign keys.
-4. Payments Table
 
+4. Payments Table
 Delete Duplicates:
 Check for duplicate payment_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -90,8 +90,8 @@ Alert if payment_amount is negative.
 Data Quality Actions:
 Remove rows with invalid foreign keys.
 Replace negative payment amounts with 0.
-5. Locations Table
 
+5. Locations Table
 Delete Duplicates:
 Check for duplicate location_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -111,8 +111,8 @@ Data Quality Alerts:
 Alert for invalid coordinates.
 Data Quality Actions:
 Remove rows with invalid coordinates.
-6. Vehicles Table
 
+6. Vehicles Table
 Delete Duplicates:
 Check for duplicate vehicle_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -129,8 +129,8 @@ Data Quality Alerts:
 Alert for invalid vehicle types or license plate formats.
 Data Quality Actions:
 Remove rows with invalid vehicle types or license plate formats.
-7. Drivers Table
 
+7. Drivers Table
 Delete Duplicates:
 Check for duplicate driver_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -151,17 +151,14 @@ Alert for invalid driver ages or license formats.
 Data Quality Actions:
 Replace invalid ages with the median age.
 Remove rows with invalid license formats.
-8. RUNT_Validation Table
 
+8. RUNT_Validation Table
 Delete Duplicates:
 Check for duplicate validation_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
 Handle Nulls:
 Check for nulls in vehicle_id, driver_id, validation_date, validation_status, validation_details.
 Action: Impute or remove rows based on null criticality.
-
-8. RUNT_Validation Table (Continued)
-
 Outlier Detection:
 Check for invalid validation_date values.
 Action: Delete invalid dates.
@@ -177,8 +174,8 @@ Alert for invalid validation statuses.
 Data Quality Actions:
 Remove rows with invalid foreign keys.
 Replace invalid statuses with "Unknown".
-9. FTP_Logs Table
 
+9. FTP_Logs Table
 Delete Duplicates:
 Check for duplicate log_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -200,8 +197,8 @@ Alert for invalid statuses.
 Data Quality Actions:
 Remove rows with invalid timestamps.
 Replace invalid statuses with "Unknown".
-10. Accident_Risk Table
 
+10. Accident_Risk Table
 Delete Duplicates:
 Check for duplicate driver_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
@@ -223,8 +220,8 @@ Alert for invalid risk labels.
 Data Quality Actions:
 Remove rows with invalid foreign keys.
 Replace invalid risk labels with 0.
-11. SURA_Costs Table
 
+11. COMPANY_Costs Table
 Delete Duplicates:
 Check for duplicate cost_id values.
 Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.

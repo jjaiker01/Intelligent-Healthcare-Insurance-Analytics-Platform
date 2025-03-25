@@ -1,0 +1,28 @@
+Reporting and Dashboards (Power BI)
+
+17 Reports and Dashboards:
+Accident frequency by location and time.
+Accident severity analysis.
+SOAT claim analysis.
+Payment tracking and management.
+Patient medical history and accident impact.
+Vehicle type and accident correlation.
+Driver accident risk analysis.
+COMPANY Medellin ERP costs integrations.
+
+Build Dashboards:
+
+Recommendations:
+
+* Accident Frequency: Use bar charts or maps to visualize accident frequency by location and time.
+* Accident Severity: Use a pie chart to show the distribution of accident severities.
+* SOAT Claim Analysis: Create a bar chart to compare claim counts and total claim amounts for different insurance providers.
+* Payment Tracking: Use a table or a card to display key payment metrics.
+* Patient Medical History Impact: Use a scatter plot to analyze the relationship between medical history and accident frequency.
+* Vehicle Type and Accident Correlation: Use a bar chart to visualize the number of accidents by vehicle type.
+* Driver Accident Risk: Use a scatter plot or a heatmap to visualize driver risk scores.
+* COMPANY Medellin ERP Costs: Use a bar chart or a stacked bar chart to visualize costs by accident type or department.
+* RUNT Validation Status: Use a pie chart to show the distribution of validation statuses.
+* FTP Log Analysis: Use a bar chart to visualize the number of file transfers by IP address.
+
+And many more dashboards based on the SQL queries provided.

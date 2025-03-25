@@ -1,0 +1,128 @@
+Healthcare insurance analysis platform
+
+Functionality and Structure:
+
+The project's core functionality revolves around the ingestion, transformation, and analysis of diverse datasets, including patient demographics, accident details, SOAT information, payment records, and external data from RUNT (National Unified Transit Registry) and the company's ERP (Enterprise Resource Planning) system.
+The project’s structure is organized around a robust data pipeline. Synthetic data, generated using Microsoft Presidio, simulates real-world scenarios, ensuring comprehensive testing and development. This data, in JSON, CSV, and SQL Server table formats, is ingested into Azure Blob Storage and subsequently into Azure Synapse Analytics via Synapse Pipelines.
+Data transformation is a crucial step, involving data quality checks, CDC (Change Data Capture) Type 2 implementation for patient and accident data, and SOAT validity assessments. RUNT API integration (if available) enables the validation of vehicle and driver information, ensuring data accuracy. Delta Lake tables within Azure Synapse serve as the central data warehouse, designed using a star schema to optimize query performance and reporting.
+Power BI is employed to visualize and analyze the processed data, creating 17 interactive dashboards and reports. These dashboards provide insights into accident frequency, severity, payment tracking, patient medical history, vehicle correlations, driver risk, and operational costs. Machine learning models, developed using Azure Machine Learning, predict accident risk for drivers, enabling proactive interventions and risk mitigation.
+
+Workflows and Relations:
+
+The project encompasses several interconnected workflows, each playing a vital role in the overall process:
+1.	Data Ingestion Workflow: Ingests raw data from various sources (JSON, CSV, SQL Server) into Azure Synapse, logging FTP connections for CSV file transfers.
+2.	Data Transformation Workflow: Cleanses, transforms, and enriches the ingested data, implementing CDC Type 2, SOAT validity checks, and RUNT API integration.
+3.	Data Warehousing Workflow: Organizes the transformed data into Delta Lake tables, designed for efficient reporting and analysis.
+4.	Reporting and Visualization Workflow: Creates interactive dashboards and reports in Power BI, providing actionable insights to stakeholders.
+5.	Machine Learning Workflow: Develops and deploys machine learning models for accident risk prediction, integrated into the data pipeline.
+6.	ERP Integration Workflow: Connects to the company's ERP system to incorporate cost data into the analysis.
+7.	RUNT API Integration Workflow: Validates vehicle and driver data using the RUNT API, enhancing data accuracy.
+These workflows are interconnected, with data flowing seamlessly from ingestion to reporting and analysis. Delta Lake tables act as the central repository, ensuring data consistency and accessibility across all workflows.
+
+Alright, let's craft a comprehensive Azure-based data engineering project for healthcare insurance, focusing on accident analysis and SOAT (Obligatory Traffic Accident Insurance) in the Antioquia Department, Colombia. This project will leverage Microsoft Presidio for data generation, Azure Synapse for data warehousing and processing, and Power BI for reporting.
+
+Machine Learning (Azure Machine Learning)
+
+Accident Risk Prediction:
+Use Azure Machine Learning to train a model to predict accident risk for drivers.
+Use features like driver age, experience, vehicle type, and historical accident data.
+Integrate the model into the Synapse pipeline for real-time predictions.
+
+Project Architecture
+
+Data Generation (Presidio):
+Generate synthetic patient data, accident data (roadway incidents), SOAT data, and related information using Presidio.
+Create data in JSON, CSV, and SQL Server table formats.
+Data Ingestion (Azure Synapse):
+Use Synapse Pipelines to ingest data from various sources (Azure Blob Storage, SQL Server).
+Implement FTP server connection logging for CSV file transfers.
+Data Transformation (Azure Synapse):
+Implement CDC Type 2 for patient and accident data.
+Develop data quality checks and validation procedures.
+Integrate with RUNT API (if available) for vehicle and driver data validation.
+Implement SOAT validity checks and accident coverage logic.
+Data Warehousing (Azure Synapse):
+Design a star schema or data vault model for efficient reporting.
+Create fact tables for accidents, payments, and patient interactions.
+Create dimension tables for patients, vehicles, locations, and time.
+Reporting and Dashboards (Power BI):
+Build 17 reports and dashboards for accident analysis, payment tracking, and KPI monitoring.
+Integrate with COMPANY Medellín ERP for cost data.
+Machine Learning (Azure Machine Learning):
+Develop a machine learning model to predict accident risk for drivers.
+Integrate the model into the Synapse pipeline.
+
+GitHub Repository Structure:
+
+healthcare-insurance-analysis/
+├── data/
+│   ├── raw/
+│   │   ├── json/
+│   │   ├── csv/
+│   │   └── sql/
+│   └── processed/
+├── pipelines/
+│   ├── ingestion/
+│   ├── transformation/
+│   └── reporting/
+├── sql/
+│   ├── schema/
+│   └── queries/
+├── powerbi/
+│   ├── reports/
+│   └── dashboards/
+├── ml/
+│   ├── models/
+│   └── scripts/
+├── scripts/
+│   ├── presidio/
+│   └── api/
+├── docs/
+│   ├── architecture.md
+│   ├── data_dictionary.md
+│   └── reports_spec.md
+└── README.md
+
+Implementation Details:
+
+1. Data Generation (Presidio)
+
+Patient Data:
+Generate 300,000+ patient records with attributes like patient ID, name, age, address (Antioquia), medical history.
+Generate 1-2 accident events per patient between 2000 and 2024.
+Accident Data:
+Generate accident records with attributes like accident ID, date, location (Antioquia), vehicle type (motorcycle, car, tractor-trailer), patient ID, driver ID, accident cause, severity.
+SOAT Data:
+Generate SOAT records with attributes like SOAT ID, vehicle ID, start date, end date, insurance provider, coverage details.
+RUNT Data (if API is available):
+If RUNT API is available, generate data that matches the API response. If not, generate mock data that represent the RUNT information.
+
+2. Data Ingestion (Azure Synapse)
+
+Synapse Pipelines:
+Create pipelines to ingest JSON, CSV, and SQL Server data into Azure Blob Storage.
+Use Copy Activity to move data.
+Implement FTP connection logging with Azure Functions or Logic Apps, saving connection details to a log table in Synapse.
+CDC Type 2:
+Implement CDC type 2 for patient and accident data, adding valid_from and valid_to columns.
+
+3. Data Transformation (Azure Synapse)
+
+Data Quality Checks:
+Implement data validation rules to ensure data consistency and accuracy.
+Use Synapse Data Flow or SQL queries for data cleaning and transformation.
+SOAT Validity Checks:
+Implement logic to check SOAT validity based on start and end dates.
+Handle SOAT coverage logic for accident claims.
+RUNT Integration:
+If RUNT API is available, create Azure Functions or Logic Apps to call the API and validate vehicle and driver data.
+Store RUNT validation results in Synapse tables.
+
+4. Data Warehousing (Azure Synapse)
+
+Star Schema:
+Create fact tables for accidents, payments, and patient interactions.
+Create dimension tables for patients, vehicles, locations, and time.
+SQL Queries:
+Develop SQL queries for data aggregation and analysis.
+Create stored procedures and views for reporting.

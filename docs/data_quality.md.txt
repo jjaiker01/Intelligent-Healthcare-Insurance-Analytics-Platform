@@ -1,0 +1,248 @@
+1. Patients Table
+
+Delete Duplicates:
+Check for duplicate patient_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for null values in name, address, medical_history.
+Action: Impute missing values (e.g., with "Unknown") or remove rows with critical nulls.
+Outlier Detection:
+Check for outliers in age (e.g., ages outside a reasonable range).
+Action: Cap or remove outlier values.
+Data Profiling:
+Calculate statistics for age (min, max, mean, std).
+Check the distribution of address and medical_history lengths.
+Data Quality Rules:
+age must be between 0 and 120.
+name can not be empty.
+Data Quality Alerts:
+Alert if age is outside the allowed range.
+Alert if more than 5% of the name fields are empty.
+Data Quality Actions:
+Replace invalid ages with the median age.
+Delete rows where the name is empty.
+2. Accidents Table
+
+Delete Duplicates:
+Check for duplicate accident_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in accident_date, location_id, vehicle_id, patient_id, driver_id, accident_cause, severity.
+Action: Impute or remove rows based on the criticality of nulls.
+Outlier Detection:
+Check for invalid accident_date values (e.g., dates in the future).
+Action: Delete invalid dates.
+Data Profiling:
+Calculate accident frequency by location_id and vehicle_type.
+Check the distribution of severity.
+Data Quality Rules:
+accident_date must be within a valid range.
+location_id, vehicle_id, patient_id, driver_id must reference existing IDs.
+Data Quality Alerts:
+Alert if accident_date is in the future.
+Alert if any foreign key references are invalid.
+Data Quality Actions:
+Remove rows with invalid foreign keys.
+Replace future dates with the current date.
+3. SOAT Table
+
+Delete Duplicates:
+Check for duplicate soat_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in start_date, end_date, insurance_provider, coverage_details.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for invalid date ranges (start_date > end_date).
+Action: Correct invalid date ranges.
+Data Profiling:
+Calculate the distribution of insurance_provider.
+Check SOAT validity rates.
+Data Quality Rules:
+start_date must be before end_date.
+vehicle_id must reference an existing vehicle.
+Data Quality Alerts:
+Alert if start_date is after end_date.
+Alert for invalid foreign key references.
+Data Quality Actions:
+Swap start_date and end_date if necessary.
+Remove rows with invalid foreign keys.
+4. Payments Table
+
+Delete Duplicates:
+Check for duplicate payment_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in accident_id, patient_id, payment_date, payment_amount, payment_type, payment_description.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for outliers in payment_amount.
+Action: Cap or remove outlier amounts.
+Data Profiling:
+Calculate payment amount statistics.
+Check payment frequency by payment_type.
+Data Quality Rules:
+accident_id and patient_id must reference existing IDs.
+payment_amount must be non-negative.
+Data Quality Alerts:
+Alert for invalid foreign key references.
+Alert if payment_amount is negative.
+Data Quality Actions:
+Remove rows with invalid foreign keys.
+Replace negative payment amounts with 0.
+5. Locations Table
+
+Delete Duplicates:
+Check for duplicate location_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in city, department, latitude, longitude.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for invalid latitude and longitude values.
+Action: Remove invalid coordinates.
+Data Profiling:
+Check the distribution of locations.
+Validate the coordinate ranges.
+Data Quality Rules:
+Latitude must be between -90 and 90.
+Longitude must be between -180 and 180.
+Data Quality Alerts:
+Alert for invalid coordinates.
+Data Quality Actions:
+Remove rows with invalid coordinates.
+6. Vehicles Table
+
+Delete Duplicates:
+Check for duplicate vehicle_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in vehicle_type, vehicle_model, vehicle_make, license_plate.
+Action: Impute or remove rows based on null criticality.
+Data Profiling:
+Check vehicle type distribution.
+Validate license plate formats.
+Data Quality Rules:
+vehicle_type must be from a predefined list.
+license_plate must match a valid format.
+Data Quality Alerts:
+Alert for invalid vehicle types or license plate formats.
+Data Quality Actions:
+Remove rows with invalid vehicle types or license plate formats.
+7. Drivers Table
+
+Delete Duplicates:
+Check for duplicate driver_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in driver_name, driver_license, driver_age.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for outliers in driver_age.
+Action: Cap or remove outlier ages.
+Data Profiling:
+Calculate driver age statistics.
+Validate driver license formats.
+Data Quality Rules:
+driver_age must be within a valid range.
+driver_license must match a valid format.
+Data Quality Alerts:
+Alert for invalid driver ages or license formats.
+Data Quality Actions:
+Replace invalid ages with the median age.
+Remove rows with invalid license formats.
+8. RUNT_Validation Table
+
+Delete Duplicates:
+Check for duplicate validation_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in vehicle_id, driver_id, validation_date, validation_status, validation_details.
+Action: Impute or remove rows based on null criticality.
+
+8. RUNT_Validation Table (Continued)
+
+Outlier Detection:
+Check for invalid validation_date values.
+Action: Delete invalid dates.
+Data Profiling:
+Check the distribution of validation_status.
+Validate the contents of validation_details.
+Data Quality Rules:
+vehicle_id and driver_id must reference existing IDs.
+validation_status must be from a predefined list.
+Data Quality Alerts:
+Alert for invalid foreign key references.
+Alert for invalid validation statuses.
+Data Quality Actions:
+Remove rows with invalid foreign keys.
+Replace invalid statuses with "Unknown".
+9. FTP_Logs Table
+
+Delete Duplicates:
+Check for duplicate log_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in timestamp, ip_address, file_name, status.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for invalid timestamps.
+Action: Delete invalid timestamps.
+Data Profiling:
+Check the distribution of ip_address and status.
+Validate file name formats.
+Data Quality Rules:
+timestamp must be a valid timestamp.
+status must be from a predefined list.
+Data Quality Alerts:
+Alert for invalid timestamps.
+Alert for invalid statuses.
+Data Quality Actions:
+Remove rows with invalid timestamps.
+Replace invalid statuses with "Unknown".
+10. Accident_Risk Table
+
+Delete Duplicates:
+Check for duplicate driver_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in risk_score, risk_label, prediction_date.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for outliers in risk_score.
+Action: Cap or remove outlier scores.
+Data Profiling:
+Calculate risk score statistics.
+Check the distribution of risk_label.
+Data Quality Rules:
+driver_id must reference an existing driver.
+risk_label must be 0 or 1.
+Data Quality Alerts:
+Alert for invalid foreign key references.
+Alert for invalid risk labels.
+Data Quality Actions:
+Remove rows with invalid foreign keys.
+Replace invalid risk labels with 0.
+11. SURA_Costs Table
+
+Delete Duplicates:
+Check for duplicate cost_id values.
+Action: Use DISTINCT or ROW_NUMBER() to remove duplicate rows.
+Handle Nulls:
+Check for nulls in accident_id, cost_type, cost_amount, cost_description.
+Action: Impute or remove rows based on null criticality.
+Outlier Detection:
+Check for outliers in cost_amount.
+Action: Cap or remove outlier amounts.
+Data Profiling:
+Calculate cost amount statistics.
+Check the distribution of cost_type.
+Data Quality Rules:
+accident_id must reference an existing accident.
+cost_amount must be non-negative.
+Data Quality Alerts:
+Alert for invalid foreign key references.
+Alert if cost_amount is negative.
+Data Quality Actions:
+Remove rows with invalid foreign keys.
+Replace negative cost amounts with 0.

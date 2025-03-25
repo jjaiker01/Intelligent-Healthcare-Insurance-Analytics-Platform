@@ -1,0 +1,380 @@
+Patients (Delta):
+patient_id (INT, PRIMARY KEY)
+name (STRING)
+age (INT)
+address (STRING)
+medical_history (STRING)
+valid_from (TIMESTAMP)
+valid_to (TIMESTAMP)
+Accidents (Delta):
+accident_id (INT, PRIMARY KEY)
+accident_date (DATE)
+location (STRING)
+vehicle_type (STRING)
+patient_id (INT, FOREIGN KEY)
+driver_id (INT)
+accident_cause (STRING)
+severity (STRING)
+valid_from (TIMESTAMP)
+valid_to (TIMESTAMP)
+
+SOAT (Delta):
+soat_id (INT, PRIMARY KEY)
+vehicle_id (INT)
+start_date (DATE)
+end_date (DATE)
+insurance_provider (STRING)
+coverage_details (STRING)
+is_valid (BOOLEAN)
+
+Payments (Delta):
+payment_id (INT, PRIMARY KEY)
+accident_id (INT, FOREIGN KEY)
+patient_id (INT, FOREIGN KEY)
+payment_date (DATE)
+payment_amount (DECIMAL)
+payment_type (STRING)
+payment_description (STRING)
+
+Locations (Delta):
+location_id (INT, PRIMARY KEY)
+city (STRING)
+department (STRING)
+latitude (DECIMAL)
+longitude (DECIMAL)
+Vehicles (Delta):
+vehicle_id (INT, PRIMARY KEY)
+vehicle_type (STRING)
+vehicle_model (STRING)
+vehicle_make (STRING)
+license_plate (STRING)
+
+Drivers (Delta):
+driver_id (INT, PRIMARY KEY)
+driver_name (STRING)
+driver_license (STRING)
+driver_age (INT)
+RUNT_Validation (Delta):
+validation_id (INT, PRIMARY KEY)
+vehicle_id (INT, FOREIGN KEY)
+driver_id (INT, FOREIGN KEY)
+validation_date (DATE)
+validation_status (STRING)
+validation_details (STRING)
+
+FTP_Logs (Delta):
+log_id (INT, PRIMARY KEY)
+timestamp (TIMESTAMP)
+ip_address (STRING)
+file_name (STRING)
+status (STRING)
+Accident_Risk (Delta):
+driver_id (INT, PRIMARY KEY)
+risk_score (DECIMAL)
+risk_label (INT)
+prediction_date (DATE)
+
+COMPANY_Costs (Delta):
+cost_id (INT, PRIMARY KEY)
+accident_id (INT, FOREIGN KEY)
+cost_type (STRING)
+cost_amount (DECIMAL)
+cost_description (STRING)
+
+Diagram.io
+
+[Patients]
+- patient_id (PK, INT)
+- name (STRING)
+- age (INT)
+- address (STRING)
+- medical_history (STRING)
+- valid_from (TIMESTAMP)
+- valid_to (TIMESTAMP)
+
+[Accidents]
+- accident_id (PK, INT)
+- accident_date (DATE)
+- location_id (FK, INT)
+- vehicle_id (FK, INT)
+- patient_id (FK, INT)
+- driver_id (FK, INT)
+- accident_cause (STRING)
+- severity (STRING)
+- valid_from (TIMESTAMP)
+- valid_to (TIMESTAMP)
+
+[SOAT]
+- soat_id (PK, INT)
+- vehicle_id (FK, INT)
+- start_date (DATE)
+- end_date (DATE)
+- insurance_provider (STRING)
+- coverage_details (STRING)
+- is_valid (BOOLEAN)
+
+[Payments]
+- payment_id (PK, INT)
+- accident_id (FK, INT)
+- patient_id (FK, INT)
+- payment_date (DATE)
+- payment_amount (DECIMAL)
+- payment_type (STRING)
+- payment_description (STRING)
+
+[Locations]
+- location_id (PK, INT)
+- city (STRING)
+- department (STRING)
+- latitude (DECIMAL)
+- longitude (DECIMAL)
+
+[Vehicles]
+- vehicle_id (PK, INT)
+- vehicle_type (STRING)
+- vehicle_model (STRING)
+- vehicle_make (STRING)
+- license_plate (STRING)
+
+[Drivers]
+- driver_id (PK, INT)
+- driver_name (STRING)
+- driver_license (STRING)
+- driver_age (INT)
+
+[RUNT_Validation]
+- validation_id (PK, INT)
+- vehicle_id (FK, INT)
+- driver_id (FK, INT)
+- validation_date (DATE)
+- validation_status (STRING)
+- validation_details (STRING)
+
+[FTP_Logs]
+- log_id (PK, INT)
+- timestamp (TIMESTAMP)
+- ip_address (STRING)
+- file_name (STRING)
+- status (STRING)
+
+[Accident_Risk]
+- driver_id (PK, INT)
+- risk_score (DECIMAL)
+- risk_label (INT)
+- prediction_date (DATE)
+
+[COMPANY_Costs]
+- cost_id (PK, INT)
+- accident_id (FK, INT)
+- cost_type (STRING)
+- cost_amount (DECIMAL)
+- cost_description (STRING)
+
+Relationships:
+- Patients (patient_id) <-> Accidents (patient_id)
+- Accidents (location_id) <-> Locations (location_id)
+- Accidents (vehicle_id) <-> Vehicles (vehicle_id)
+- Accidents (driver_id) <-> Drivers (driver_id)
+- Accidents (accident_id) <-> Payments (accident_id)
+- Accidents (accident_id) <-> COMPANY_Costs (accident_id)
+- Vehicles (vehicle_id) <-> SOAT (vehicle_id)
+- Drivers (driver_id) <-> RUNT_Validation (driver_id)
+- Vehicles (vehicle_id) <-> RUNT_Validation (vehicle_id)
+- Drivers (driver_id) <-> Accident_Risk (driver_id)
+
+
+
+Absolutely! Let's create a detailed data dictionary for the data model you've provided.
+
+Data Dictionary: Healthcare Insurance Analysis Project
+
+1. Patients Table
+patient_id (PK, INT):
+Unique identifier for each patient.
+Primary key of the Patients table.
+Data Type: Integer.
+name (STRING):
+Full name of the patient.
+Data Type: String.
+age (INT):
+Age of the patient in years.
+Data Type: Integer.
+address (STRING):
+Full address of the patient.
+Data Type: String.
+medical_history (STRING):
+Brief description of the patient's medical history.
+Data Type: String.
+valid_from (TIMESTAMP):
+Timestamp indicating when the patient record became valid (for CDC Type 2).
+Data Type: Timestamp.
+valid_to (TIMESTAMP):
+Timestamp indicating when the patient record became invalid (for CDC Type 2). Null if the record is currently valid.
+Data Type: Timestamp.
+
+2. Accidents Table
+accident_id (PK, INT):
+Unique identifier for each accident.
+Primary key of the Accidents table.
+Data Type: Integer.
+accident_date (DATE):
+Date of the accident.
+Data Type: Date.
+location_id (FK, INT):
+Foreign key referencing the Locations table, indicating the location of the accident.
+Data Type: Integer.
+vehicle_id (FK, INT):
+Foreign key referencing the Vehicles table, indicating the vehicle involved in the accident.
+Data Type: Integer.
+patient_id (FK, INT):
+Foreign key referencing the Patients table, indicating the patient involved in the accident.
+Data Type: Integer.
+driver_id (FK, INT):
+Foreign key referencing the Drivers table, indicating the driver involved in the accident.
+Data Type: Integer.
+accident_cause (STRING):
+Description of the cause of the accident.
+Data Type: String.
+severity (STRING):
+Severity of the accident (e.g., Minor, Moderate, Severe).
+Data Type: String.
+valid_from (TIMESTAMP):
+Timestamp indicating when the accident record became valid (for CDC Type 2).
+Data Type: Timestamp.
+valid_to (TIMESTAMP):
+Timestamp indicating when the accident record became invalid (for CDC Type 2). Null if the record is currently valid.
+Data Type: Timestamp.
+
+3. SOAT Table
+soat_id (PK, INT):
+Unique identifier for each SOAT policy.
+Primary key of the SOAT table.
+Data Type: Integer.
+vehicle_id (FK, INT):
+Foreign key referencing the Vehicles table, indicating the vehicle covered by the SOAT policy.
+Data Type: Integer.
+start_date (DATE):
+Start date of the SOAT policy.
+Data Type: Date.
+end_date (DATE):
+End date of the SOAT policy.
+Data Type: Date.
+insurance_provider (STRING):
+Name of the insurance provider.
+Data Type: String.
+coverage_details (STRING):
+Details of the SOAT policy coverage.
+Data Type: String.
+is_valid (BOOLEAN):
+Indicates whether the SOAT policy is currently valid.
+Data Type: Boolean.
+
+4. Payments Table
+payment_id (PK, INT):
+Unique identifier for each payment.
+Primary key of the Payments table.
+Data Type: Integer.
+accident_id (FK, INT):
+Foreign key referencing the Accidents table, indicating the accident related to the payment.
+Data Type: Integer.
+patient_id (FK, INT):
+Foreign key referencing the Patients table, indicating the patient related to the payment.
+Data Type: Integer.
+payment_date (DATE):
+Date of the payment.
+Data Type: Date.
+payment_amount (DECIMAL):
+Amount of the payment.
+Data Type: Decimal.
+payment_type (STRING):
+Type of payment (e.g., claim, reimbursement).
+Data Type: String.
+payment_description (STRING):
+Description of the payment.
+Data Type: String.
+
+5. Locations Table
+location_id (PK, INT):
+Unique identifier for each location.
+Primary key of the Locations table.
+Data Type: Integer.
+city (STRING):
+City of the location.
+Data Type: String.
+department (STRING):
+Department of the location.
+Data Type: String.
+latitude (DECIMAL):
+Latitude of the accident location.
+Data Type: Decimal
+longitude (DECIMAL):
+Longitude of the accident location.
+Data Type: Decimal
+
+6. Vehicles Table
+vehicle_id (PK, INT):
+Unique identifier for each vehicle.
+Primary key of the Vehicles table.
+Data Type: Integer.
+vehicle_type (STRING):
+Type of vehicle (e.g., Motorcycle, Private Car, Tractor-Trailer).
+Data Type: String.
+vehicle_model (STRING):
+Model of the vehicle.
+Data Type: String.
+vehicle_make (STRING):
+Manufacture of the vehicle.
+Data Type: String.
+license_plate (STRING):
+License plate of the vehicle.
+Data Type: String.
+
+7. Drivers Table
+driver_id (PK, INT):
+Unique identifier for each driver.
+Primary key of the Drivers table.
+Data Type: Integer.
+driver_name (STRING):
+Full name of the driver.
+Data Type: String.
+driver_license (STRING):
+Driver's license number.
+Data Type: String.
+driver_age (INT):
+Age of the driver.
+Data Type: Integer.
+
+8. RUNT_Validation Table
+validation_id (PK, INT):
+Unique identifier for each RUNT validation record.
+Primary key of the RUNT_Validation table.
+Data Type: Integer.
+vehicle_id (FK, INT):
+Foreign key referencing the Vehicles table, indicating the validated vehicle.
+Data Type: Integer.
+driver_id (FK, INT):
+Foreign key referencing the Drivers table, indicating the validated driver.
+Data Type: Integer.
+validation_date (DATE):
+Date of the RUNT validation.
+Data Type: Date.
+validation_status (STRING):
+Status of the RUNT validation (e.g., Valid, Invalid).
+Data Type: String.
+validation_details (STRING):
+Details of the RUNT validation.
+Data Type: String.
+
+9. FTP_Logs Table
+log_id (PK, INT):
+Unique identifier for each FTP log entry.
+Primary key of the FTP_Logs table.
+Data Type: Integer.
+timestamp (TIMESTAMP):
+Timestamp of the FTP connection.
+Data Type: Timestamp.
+ip_address (STRING):
+IP address of the FTP client.
+Data Type: String.
+file_name (STRING):
+Name of the file transferred
